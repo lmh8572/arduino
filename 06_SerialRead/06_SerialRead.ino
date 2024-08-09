@@ -16,7 +16,7 @@ void loop() {
   while(1){
     if(Serial.available()){
       char userInput = Serial.read();
-      if(userInput == '\n'){
+      if(userInput == '\r'){
         str[cnt] = '\0';
         cnt = 0;
         break;
@@ -27,10 +27,11 @@ void loop() {
       }
     }  
   }
+  Serial.print(str);
 
   // ============== 문자열을 이용한 제어 부분 =====================
-  if(strcmp(str,"LED0_ON\r") == 0) digitalWrite(LED, HIGH);
-  else if(strcmp(str,"LED0_OFF\r") == 0) digitalWrite(LED, LOW);
+  if(strcmp(str,"LED0_ON") == 0) digitalWrite(LED, HIGH);
+  else if(strcmp(str,"LED0_OFF") == 0) digitalWrite(LED, LOW);
 
   // 2. C++언어 스타일 코딩(Serial.readString함수 이용)
   // if(Serial.available()){
