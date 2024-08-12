@@ -4,12 +4,14 @@
   - LED는 Active HIGH
 */
 
+#include "PinChangeInterrupt.h"
+
 const int ledPin_1 = 4;
-const int buttonPin_1 = 2;
+const int buttonPin_1 = 6;
 int led_flag_1 = 0;  // 0:OFF, 1:ON
 
 const int ledPin_2 = 5;
-const int buttonPin_2 = 3;
+const int buttonPin_2 = 7;
 int led_flag_2 = 0;  // 0:OFF, 1:ON
 
 
@@ -38,10 +40,10 @@ void setup() {
   Serial.begin(115200);
   pinMode(buttonPin_1, INPUT);
   pinMode(ledPin_1, OUTPUT);
-  attachInterrupt(digitalPinToInterrupt(buttonPin_1), buttonPressed_1, RISING);
+  attachPCINT(digitalPinToPCINT(buttonPin_1), buttonPressed_1, RISING);
   pinMode(buttonPin_2, INPUT);
   pinMode(ledPin_2, OUTPUT);
-  attachInterrupt(digitalPinToInterrupt(buttonPin_2), buttonPressed_2, RISING);
+  attachPCINT(digitalPinToPCINT(buttonPin_2), buttonPressed_2, RISING);
 
   // LED를 끄고 시작
   digitalWrite(ledPin_1, LOW);
