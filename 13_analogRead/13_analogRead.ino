@@ -1,6 +1,8 @@
 #define A_REF       5.0
 #define RESOLUTION  1024
 #define UNIT_ADC    A_REF/RESOLUTION
+#define VR          10000.0
+
 const int analogPin = A0;
 
 void setup() {
@@ -11,10 +13,17 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   float analogValue = analogRead(analogPin);
+  float volt = analogValue * UNIT_ADC;
+  float reg = (VR*volt) / A_REF;
 
   Serial.print(analogValue, 0);
   Serial.print(", ");
-  Serial.println(analogValue * UNIT_ADC, 2);
+  Serial.print(volt, 2);
+  Serial.print(" V, ");
+  Serial.print(reg);
+  Serial.println(" ohm");
+  delay(300);
+
 }
 
 // char temp[20];
